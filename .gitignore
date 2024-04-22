@@ -10,6 +10,9 @@
 **/bin/
 **/bin-int/
 
+*.vcxproj.filters
+*.vcxproj
+
 # Logs #
 ######################
 *.log
