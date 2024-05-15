@@ -240,7 +240,7 @@ RP3D_FORCE_INLINE void Quaternion::normalize() {
     decimal l = length();
 
     // Check if the length is not equal to zero
-    assert (l > MACHINE_EPSILON);
+    assert (l >= MACHINE_EPSILON);
 
     x /= l;
     y /= l;
@@ -262,7 +262,7 @@ RP3D_FORCE_INLINE Quaternion Quaternion::getUnit() const {
     decimal lengthQuaternion = length();
 
     // Check if the length is not equal to zero
-    assert (lengthQuaternion > MACHINE_EPSILON);
+    assert (lengthQuaternion >= MACHINE_EPSILON);
 
     // Compute and return the unit quaternion
     return Quaternion(x / lengthQuaternion, y / lengthQuaternion,

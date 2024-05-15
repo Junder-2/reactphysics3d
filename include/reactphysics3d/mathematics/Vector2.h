@@ -261,7 +261,7 @@ RP3D_FORCE_INLINE Vector2& Vector2::operator*=(decimal number) {
 
 // Overloaded operator for division by a number with assignment
 RP3D_FORCE_INLINE Vector2& Vector2::operator/=(decimal number) {
-    assert(number > std::numeric_limits<decimal>::epsilon());
+    assert(std::abs(number) >= MACHINE_EPSILON);
     x /= number;
     y /= number;
     return *this;
@@ -304,14 +304,14 @@ RP3D_FORCE_INLINE Vector2 operator*(const Vector2& vector1, const Vector2& vecto
 
 // Overloaded operator for division by a number
 RP3D_FORCE_INLINE Vector2 operator/(const Vector2& vector, decimal number) {
-    assert(number > MACHINE_EPSILON);
+    assert(std::abs(number) >= MACHINE_EPSILON);
     return Vector2(vector.x / number, vector.y / number);
 }
 
 // Overload operator for division between two vectors
 RP3D_FORCE_INLINE Vector2 operator/(const Vector2& vector1, const Vector2& vector2) {
-    assert(vector2.x > MACHINE_EPSILON);
-    assert(vector2.y > MACHINE_EPSILON);
+    assert(std::abs(vector2.x) >= MACHINE_EPSILON);
+    assert(std::abs(vector2.y) >= MACHINE_EPSILON);
     return Vector2(vector1.x / vector2.x, vector1.y / vector2.y);
 }
 
