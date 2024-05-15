@@ -94,7 +94,7 @@ void RigidBody::setType(BodyType type) {
 
         const decimal mass = mWorld.mRigidBodyComponents.getMass(mEntity);
 
-        if (mass > decimal(0.0)) {
+        if (mass >= MACHINE_EPSILON) {
             mWorld.mRigidBodyComponents.setMassInverse(mEntity, decimal(1.0) / mass) ;
         }
         else {
@@ -408,7 +408,7 @@ Vector3 RigidBody::computeCenterOfMass() const {
         centerOfMassLocal += colliderMass * mWorld.mCollidersComponents.mLocalToBodyTransforms[colliderIndex].getPosition();
     }
 
-    if (totalMass > decimal(0.0)) {
+    if (totalMass >= MACHINE_EPSILON) {
         centerOfMassLocal /= totalMass;
     }
 
@@ -527,7 +527,7 @@ void RigidBody::updateMassFromColliders() {
     if (type == BodyType::DYNAMIC) {
 
         // Compute the inverse mass
-        if (totalMass > decimal(0.0)) {
+        if (totalMass >= MACHINE_EPSILON) {
             mWorld.mRigidBodyComponents.setMassInverse(mEntity, decimal(1.0) / totalMass);
         }
         else {
@@ -600,7 +600,7 @@ void RigidBody::updateMassPropertiesFromColliders() {
     if (type == BodyType::DYNAMIC) {
 
         // Compute the inverse mass
-        if (totalMass > decimal(0.0)) {
+        if (totalMass >= MACHINE_EPSILON) {
             mWorld.mRigidBodyComponents.setMassInverse(mEntity, decimal(1.0) / totalMass);
         }
         else {
@@ -633,7 +633,7 @@ void RigidBody::setMass(decimal mass) {
     const BodyType type = mWorld.mRigidBodyComponents.getBodyType(mEntity);
     if (type == BodyType::DYNAMIC) {
 
-        if (mass > decimal(0.0)) {
+        if (mass >= MACHINE_EPSILON) {
             mWorld.mRigidBodyComponents.setMassInverse(mEntity, decimal(1.0) / mass);
         }
         else {
